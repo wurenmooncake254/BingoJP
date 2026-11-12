@@ -28,7 +28,7 @@ open class BuildTask : DefaultTask() {
 
     @TaskAction
     fun assemble() {
-        val executable = """D:\nvm4w\nodejs\node""";
+        val executable = System.getenv("TAURI_NODE_BIN") ?: if (Os.isFamily(Os.FAMILY_WINDOWS)) "node.exe" else "node"
         try {
             runTauriCli(executable)
         } catch (e: Exception) {
